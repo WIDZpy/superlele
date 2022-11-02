@@ -29,15 +29,20 @@ while run:
 
     print(carre_rect.x, carre_rect.width)
 
+    if carre_rect.x == 0 and carre_rect.y == 0:
+        input()
+
+
+
     if (carre_rect.x <= 0 or carre_rect.x >= win.get_size()[0]-carre_rect.width) or (carre_rect.y <= 0 or carre_rect.y >= win.get_size()[1]- carre_rect.height):
         color = rand_color()
 
-    if x >= tail[0]-carre_rect.width:
+    if x >= tail[0]:
         a = -1
     elif x <= 0:
         a = 1
 
-    if y >= tail[1] - carre_rect.height:
+    if y >= tail[1]:
         b = -1
     elif y <= 0:
         b = 1
