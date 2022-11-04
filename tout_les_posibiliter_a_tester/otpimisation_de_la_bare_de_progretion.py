@@ -5,7 +5,7 @@ from random import randint
 from util import ProgressBar, save_new, rand_color
 
 
-def func(title: str = '', itration: int = 1, save_fille_name: str = 'save_squars_corods', save_fps_fille_name: str = 'save_fps'):
+def func(title: str= '', itration: int = 1):
     progres = ProgressBar()
 
     pg.init()
@@ -22,7 +22,7 @@ def func(title: str = '', itration: int = 1, save_fille_name: str = 'save_squars
     speed = 10
     cot = 10
 
-
+    fille = '../save_squars_corods'
 
     co = 0
 
@@ -31,12 +31,13 @@ def func(title: str = '', itration: int = 1, save_fille_name: str = 'save_squars
 
 
     while run != 0:
-        progres.progres(run, raar)
+
         co += 1
         t.tick(1000)
 
         if pg.event.get(pg.QUIT):
             run = False
+
         carre_rect = pg.rect.Rect((x, y, 50, 70))
         litle_squar = pg.rect.Rect((carre_rect.center[0]-cot, carre_rect.center[1]-cot, 2*cot, 2*cot))
         pg.draw.rect(surf_trace, color, (carre_rect.center[0]-cot, carre_rect.center[1]-cot, 2*cot, 2*cot))
@@ -44,6 +45,7 @@ def func(title: str = '', itration: int = 1, save_fille_name: str = 'save_squars
         pg.draw.rect(win, (0, 0, 0), carre_rect)
 
         if carre_rect.x == 0 and carre_rect.y == 0:
+            progres.progres(run, raar)
             run -= 1
 
         if (carre_rect.x <= 0 or carre_rect.x >= win.get_size()[0]-carre_rect.width) or (carre_rect.y <= 0 or carre_rect.y >= win.get_size()[1] - carre_rect.height):
@@ -68,12 +70,12 @@ def func(title: str = '', itration: int = 1, save_fille_name: str = 'save_squars
 
         win.fill((0, 0, 0))
 
-    save_new(fps, save_fps_fille_name)
+    save_new(fps, '../save_fps')
 
-    with open(save_fille_name, 'wb') as f:
+    with open(fille, 'wb') as f:
         pickle.dump(ar, f)
 
-    with open(save_fille_name, 'rb') as f1:
+    with open(fille, 'rb') as f1:
         OL = pickle.load(f1)
 
 

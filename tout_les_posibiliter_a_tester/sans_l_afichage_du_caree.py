@@ -5,7 +5,8 @@ from random import randint
 from util import ProgressBar, save_new, rand_color
 
 
-def func(title: str = '', itration: int = 1, save_fille_name: str = 'save_squars_corods', save_fps_fille_name: str = 'save_fps'):
+
+def func(title: str= '', itration: int = 1):
     progres = ProgressBar()
 
     pg.init()
@@ -18,17 +19,16 @@ def func(title: str = '', itration: int = 1, save_fille_name: str = 'save_squars
 
     run = raar = itration
     t = pg.time.Clock()
-    surf_trace = pg.surface.Surface(tail)
+
     speed = 10
     cot = 10
 
-
+    fille = '../save_squars_corods'
 
     co = 0
 
     ar = []
     fps = [title]
-
 
     while run != 0:
         progres.progres(run, raar)
@@ -39,9 +39,7 @@ def func(title: str = '', itration: int = 1, save_fille_name: str = 'save_squars
             run = False
         carre_rect = pg.rect.Rect((x, y, 50, 70))
         litle_squar = pg.rect.Rect((carre_rect.center[0]-cot, carre_rect.center[1]-cot, 2*cot, 2*cot))
-        pg.draw.rect(surf_trace, color, (carre_rect.center[0]-cot, carre_rect.center[1]-cot, 2*cot, 2*cot))
-        win.blit(surf_trace, (0, 0))
-        pg.draw.rect(win, (0, 0, 0), carre_rect)
+        pg.draw.rect(win, color, litle_squar)
 
         if carre_rect.x == 0 and carre_rect.y == 0:
             run -= 1
@@ -66,15 +64,10 @@ def func(title: str = '', itration: int = 1, save_fille_name: str = 'save_squars
 
         pg.display.update()
 
-        win.fill((0, 0, 0))
+    save_new(fps, '../save_fps')
 
-    save_new(fps, save_fps_fille_name)
-
-    with open(save_fille_name, 'wb') as f:
+    with open(fille, 'wb') as f:
         pickle.dump(ar, f)
-
-    with open(save_fille_name, 'rb') as f1:
-        OL = pickle.load(f1)
 
 
 if __name__ == '__main__':
