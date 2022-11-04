@@ -2,12 +2,9 @@ import pickle
 from pprint import pprint
 import pygame as pg
 from random import randint
-from tkinter import *
-from tkinter.ttk import *
+from util import ProgressBar, save_new
 
-root = Tk()
-progress = Progressbar(root, orient=HORIZONTAL, length=100, mode='determinate')
-progress.pack(pady=10)
+progres = ProgressBar()
 
 pg.init()
 tail = (790, 400)
@@ -17,11 +14,13 @@ color = (255, 255, 255)
 x = 0
 y = 0
 
-run = raar = 30
+run = raar = 10
 t = pg.time.Clock()
 surf_trace = pg.surface.Surface(tail)
 speed = 10
 cot = 10
+
+fille = 'save_squars_corods'
 
 
 def rand_color():
@@ -32,16 +31,18 @@ def rand_color():
 co = 0
 
 ar = []
+fps = ['normale']
+
 
 while run != 0:
-    progress['value'] = 100 - run/raar * 100
-    root.update()
+    progres.progres(run, raar)
     co += 1
     t.tick(1000)
 
     if pg.event.get(pg.QUIT):
         run = False
     carre_rect = pg.rect.Rect((x, y, 50, 70))
+    litle_squar = pg.rect.Rect((carre_rect.center[0]-cot, carre_rect.center[1]-cot, 2*cot, 2*cot))
     pg.draw.rect(surf_trace, color, (carre_rect.center[0]-cot, carre_rect.center[1]-cot, 2*cot, 2*cot))
     win.blit(surf_trace, (0, 0))
     pg.draw.rect(win, (0, 0, 0), carre_rect)
@@ -64,16 +65,18 @@ while run != 0:
     x += a*speed
     y += b*speed
     print('\r', x, y, t, end='')
-
-    ar.append([carre_rect, color, co])
+    fps.append(t.get_fps())
+    ar.append([litle_squar, color, co])
 
     pg.display.update()
 
     win.fill((0, 0, 0))
 
-with open('fill', 'wb') as f:
+save_new(fps, 'save_fps')
+
+with open(fille, 'wb') as f:
     pickle.dump(ar, f)
 
-with open('fill', 'rb') as f1:
+with open(fille, 'rb') as f1:
     OL = pickle.load(f1)
-pprint(OL)
+
