@@ -14,4 +14,4 @@ def play_list(lst):
 
 read_fille()
 
-play_list(read_fille("fill"))
+play_list(read_fille("save_squars_corods"))
