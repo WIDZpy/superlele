@@ -2,7 +2,7 @@ import pickle
 from pprint import pprint
 import pygame as pg
 from random import randint
-from util import ProgressBar, save_new, rand_color
+from util import ProgressBar, save_new, rand_color, tk
 
 
 def func(title: str = '', itration: int = 1, save_fille_name: str = 'save_squars_corods', save_fps_fille_name: str = 'save_fps'):
@@ -68,7 +68,7 @@ def func(title: str = '', itration: int = 1, save_fille_name: str = 'save_squars
 
         win.fill((0, 0, 0))
 
-    save_new(fps, save_fps_fille_name)
+	save_new(fps, save_fps_fille_name)
 
     with open(save_fille_name, 'wb') as f:
         pickle.dump(ar, f)

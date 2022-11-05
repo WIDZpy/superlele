@@ -40,24 +40,35 @@ def init_fille(fille_name: str = 'save'):
 		pickle.dump([], wf)
 
 
-def save_new(lst: 'list', fille: str = 'save'):
+def save_new(element, fille: str = 'save'):
 	new_fill = read_fille(fille)
-	new_fill.append(lst)
+	new_fill.append(element)
 	with open(fille, 'wb') as wf:
 		pickle.dump(new_fill, wf)
 
 
-def afiche_graphe(lst: 'list'):
+def afiche_graphe(lst: 'list', moy: bool = False):
 	l = []
 	for game in lst:
-		plt.plot(np.arange(len(game) - 1), game[1:], label=game[0])
-		l.append(game[0])
+		if moy == True:
+			a = np.array(game[1:])
+			a.fill(a.mean())
+			pprint(a)
+			plt.plot(np.arange(len(game) - 1), a, label=game[0])
+		elif moy == False:
+			plt.plot(np.arange(len(game) - 1), game[1:], label=game[0])
+		else:
+			a = np.array(game[1:])
+			a.fill(a.mean())
+			pprint(a)
+			plt.plot(np.arange(len(game) - 1), a, label=game[0])
+			plt.plot(np.arange(len(game) - 1), game[1:], label=game[0])
 	plt.legend()
 	plt.show()
 
 
 if __name__ == '__main__':
-	afiche_graphe(read_fille('save_fps'))
+	afiche_graphe(read_fille('save_fps'), moy=True)
 	# print(read_fille('save_fps'))
 	# save_new([1, 1], 'save_fps')
 	# print(read_fille('save_fps'))
