@@ -64,7 +64,7 @@ def func(title: str = '', itration: int = 1, save_fille_name: str = 'save_squars
 
         pg.display.update()
 
-	save_new(fps, save_fps_fille_name)
+    # save_new(fps, save_fps_fille_name)
 
     with open(save_fille_name, 'wb') as f:
         pickle.dump(ar, f)
@@ -74,5 +74,5 @@ def func(title: str = '', itration: int = 1, save_fille_name: str = 'save_squars
 
 
 if __name__ == '__main__':
-    func(itration=50)
+    func(itration=15, save_fille_name='../finale_')
     input()
