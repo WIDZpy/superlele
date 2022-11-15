@@ -56,8 +56,8 @@ def func(title: str = '', itration: int = 1, save_fille_name: str = 'save_squars
             b = -1
         elif y <= 0:
             b = 1
-        x += a*speed
-        y += b*speed
+        x += a * speed
+        y += b * speed
         print('\r', x, y, t, end='')
         fps.append(t.get_fps())
         ar.append([litle_squar, color, co])
