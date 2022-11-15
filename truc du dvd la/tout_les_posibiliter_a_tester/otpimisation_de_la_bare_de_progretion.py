@@ -1,7 +1,5 @@
 import pickle
-from pprint import pprint
 import pygame as pg
-from random import randint
 from util import ProgressBar, save_new, rand_color
 
 

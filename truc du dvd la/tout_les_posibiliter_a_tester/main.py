@@ -1,8 +1,6 @@
 import pickle
-from pprint import pprint
 import pygame as pg
-from random import randint
-from util import ProgressBar, save_new, rand_color, tk
+from util import ProgressBar, save_new, rand_color
 
 
 def func(title: str = '', itration: int = 1, save_fille_name: str = 'save_squars_corods', save_fps_fille_name: str = 'save_fps'):
@@ -31,6 +29,7 @@ def func(title: str = '', itration: int = 1, save_fille_name: str = 'save_squars
 
 
     while run != 0:
+        progres.progres(run, raar)
         co += 1
         t.tick(1000)
 
@@ -38,14 +37,15 @@ def func(title: str = '', itration: int = 1, save_fille_name: str = 'save_squars
             run = False
         carre_rect = pg.rect.Rect((x, y, 50, 70))
         litle_squar = pg.rect.Rect((carre_rect.center[0]-cot, carre_rect.center[1]-cot, 2*cot, 2*cot))
-        pg.draw.rect(win, color, (carre_rect.center[0]-cot, carre_rect.center[1]-cot, 2*cot, 2*cot))
+        pg.draw.rect(surf_trace, color, (carre_rect.center[0]-cot, carre_rect.center[1]-cot, 2*cot, 2*cot))
+        win.blit(surf_trace, (0, 0))
+        pg.draw.rect(win, (0, 0, 0), carre_rect)
 
         if carre_rect.x == 0 and carre_rect.y == 0:
             run -= 1
-            progres.progres(run, raar)
 
         if (carre_rect.x <= 0 or carre_rect.x >= win.get_size()[0]-carre_rect.width) or (carre_rect.y <= 0 or carre_rect.y >= win.get_size()[1] - carre_rect.height):
-             color = rand_color()
+            color = rand_color()
 
         if x >= tail[0]-carre_rect.width:
             a = -1
